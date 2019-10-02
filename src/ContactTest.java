@@ -84,6 +84,12 @@ public class ContactTest {
             String userName = scanner.getString("give a name");
             String  userNumber = scanner.getString("give their number");
             addContact(userName,userNumber);
+        }else if(userOptions.equalsIgnoreCase("3")){
+            System.out.println("You chose 3");
+        }else if(userOptions.equalsIgnoreCase("4")){
+            System.out.println("you chose 4");
+        }else if(userOptions.equalsIgnoreCase("5")){
+            System.out.println("okay..bye");
         }
 
     }
