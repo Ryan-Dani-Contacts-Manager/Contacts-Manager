@@ -9,6 +9,10 @@ public class Contact {
 
     }
 
+    public String getNamePhoneNumber () {
+        return this.name + "|" + this.phoneNumber;
+    }
+
     public String getName() {
         return name;
     }
