@@ -15,35 +15,37 @@ public class ContactTest extends ContactActions {
 
     public static void switchCase (ContactActions actions) {
 
+        boolean repeat = true;
             Input sc = new Input();
 
-            actions.userMenu();
+        do {
 
+            actions.userMenu();
             String userInput = sc.getString(" \"Enter an option (1, 2, 3, 4 or 5):");
+
 
             if (userInput.equalsIgnoreCase("1")) {
                 actions.displayContacts();
-              switchCase(actions);
 
             }else if(userInput.equalsIgnoreCase("2")){
                 actions.addContact();
-                switchCase(actions);
 
             }else if(userInput.equalsIgnoreCase("3")){
                 actions.searchContact();
-                switchCase(actions);
 
             }else if(userInput.equalsIgnoreCase("4")){
                 actions.deleteContact();
                 actions.displayContacts();
-                switchCase(actions);
 
             }else if(userInput.equalsIgnoreCase("5")){
                 System.out.println("okay..bye");
+                repeat = false;
 
             } //else if
 
 
-    } //switchCase()
+    } while(repeat);
+
+        } //switchCase();
 
 } //ContactTest Class
