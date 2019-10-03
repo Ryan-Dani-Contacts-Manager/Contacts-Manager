@@ -6,10 +6,14 @@ public class HandleActions {
         boolean repeat = true;
         do {
             if (userOptions.equalsIgnoreCase("1")) {
-                //System.out.println(contacts);
+
                 actions.displayContacts(contacts);
-                //System.out.println("1 ran");
-                break;
+
+                //Displays user options again
+
+                actions.userMenu(scanner);
+
+                switchCase(userOptions, scanner, contacts, actions);
 
             } else if (userOptions.equalsIgnoreCase("2")) {
 

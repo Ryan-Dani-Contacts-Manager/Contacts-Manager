@@ -15,6 +15,7 @@ public class ContactTest extends ContactActions {
 //    static List<Contact> contacts = new ArrayList<>();
 
     public static void main(String[] args) {
+
         Input userInput = new Input();
 
         ContactActions actions = new ContactActions();
