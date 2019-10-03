@@ -16,54 +16,52 @@ public class ContactTest {
     public static void main(String[] args) {
         Input userInput = new Input();
 
+        ContactActions actions = new ContactActions();
 
-    addContact("Bob", "911");
-    addContact("Ryan", "093284");
-    addContact("Daniel", "93028343");
+
+    actions.addContact("Bob", "911");
     String userOption = userMenu(userInput);
-    switchCase(userOption,userInput,contacts);
+    switchCase(userOption,userInput,contacts, actions);
 
 
-//        String userName = userInput.getString("give a name");
-//        String  userNumber = userInput.getString("give their number");
 
 
     } //Main()
 
 
-    public static void addContact(String userName, String userNumber) {
+//    public static void addContact(String userName, String userNumber) {
+//
+//        Contact newContact = new Contact(userName, userNumber);
+//
+//        contacts.add(newContact);
+//
+//        List<String> contactsListString = formatObjectsToStrings(contacts);
+//
+//        Path ContactListPath = Paths.get("src","ContactList.txt");
+//
+//        try {
+//            Files.write(ContactListPath, contactsListString);
+//        } catch(IOException e) {
+//            e.printStackTrace();
+//        }
+//
+//
+//
+//
+//    } //addContact()
 
-        Contact newContact = new Contact(userName, userNumber);
 
-        contacts.add(newContact);
-
-        List<String> contactsListString = formatObjectsToStrings(contacts);
-
-        Path ContactListPath = Paths.get("src","ContactList.txt");
-
-        try {
-            Files.write(ContactListPath, contactsListString);
-        } catch(IOException e) {
-            e.printStackTrace();
-        }
-
-
-
-
-    } //addContact()
-
-
-    public static List<String> formatObjectsToStrings(List<Contact> contacts) {
-
-        List<String> stringContacts = new ArrayList<>();
-
-        for(Contact person : contacts) {
-            stringContacts.add(person.getNamePhoneNumber());
-        }
-
-        return stringContacts;
-
-    } //formatObjectsToStrings()
+//    public static List<String> formatObjectsToStrings(List<Contact> contacts) {
+//
+//        List<String> stringContacts = new ArrayList<>();
+//
+//        for(Contact person : contacts) {
+//            stringContacts.add(person.getNamePhoneNumber());
+//        }
+//
+//        return stringContacts;
+//
+//    } //formatObjectsToStrings()
 
     public static String userMenu (Input scanner) {
         String menu = "1. View contacts.\n" +
@@ -76,22 +74,55 @@ public class ContactTest {
 
     }
 
-    public static void switchCase (String userOptions, Input scanner,List<Contact> contacts) {
+    public static void switchCase (String userOptions, Input scanner,List<Contact> contacts, ContactActions actions) {
         boolean repeat = true;
         do {
             if (userOptions.equalsIgnoreCase("1")) {
                 displayContacts(contacts);
             }else if(userOptions.equalsIgnoreCase("2")){
+
                 String userName = scanner.getString("give a name");
+
                 String  userNumber = scanner.getString("give their number");
-                addContact(userName,userNumber);
+
+                actions.addContact(userName,userNumber);
+
+                userMenu(scanner);
+
+                //Displays user options again
+
+                userMenu(scanner);
+
+                switchCase(userOptions, scanner, contacts, actions);
+
             }else if(userOptions.equalsIgnoreCase("3")){
+
                 String contactToSearch = scanner.getString("Please enter a name to search for");
+
                 searchContact(contactToSearch);
+
+                switchCase(userOptions,scanner,contacts,actions);
+
+                //Displays user options again
+
+                userMenu(scanner);
+
+                switchCase(userOptions, scanner, contacts, actions);
+
             }else if(userOptions.equalsIgnoreCase("4")){
+
                 displayContacts(contacts);
+
                 String contactToDelete = scanner.getString("Enter a name to delete");
+
                 deleteContact(contactToDelete);
+
+                //Displays user options again
+
+                userMenu(scanner);
+
+                switchCase(userOptions, scanner, contacts, actions);
+
             }else if(userOptions.equalsIgnoreCase("5")){
                 System.out.println("okay..bye");
                 repeat = false;
