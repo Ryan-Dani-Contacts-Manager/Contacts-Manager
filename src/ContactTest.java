@@ -77,24 +77,29 @@ public class ContactTest {
     }
 
     public static void switchCase (String userOptions, Input scanner,List<Contact> contacts) {
-        if (userOptions.equalsIgnoreCase("1")) {
-            displayContacts(contacts);
-        }else if(userOptions.equalsIgnoreCase("2")){
-            String userName = scanner.getString("give a name");
-            String  userNumber = scanner.getString("give their number");
-            addContact(userName,userNumber);
-        }else if(userOptions.equalsIgnoreCase("3")){
-            displayContacts(contacts);
-           String contactToDelete = scanner.getString("Enter a name to delete");
-           deleteContact(contactToDelete);
-//            displayContacts(contacts);
-        }else if(userOptions.equalsIgnoreCase("4")){
-            System.out.println("you chose 4");
-        }else if(userOptions.equalsIgnoreCase("5")){
-            System.out.println("okay..bye");
-        }
+        boolean repeat = true;
+        do {
+            if (userOptions.equalsIgnoreCase("1")) {
+                displayContacts(contacts);
+            }else if(userOptions.equalsIgnoreCase("2")){
+                String userName = scanner.getString("give a name");
+                String  userNumber = scanner.getString("give their number");
+                addContact(userName,userNumber);
+            }else if(userOptions.equalsIgnoreCase("3")){
+                String contactToSearch = scanner.getString("Please enter a name to search for");
+                searchContact(contactToSearch);
+            }else if(userOptions.equalsIgnoreCase("4")){
+                displayContacts(contacts);
+                String contactToDelete = scanner.getString("Enter a name to delete");
+                deleteContact(contactToDelete);
+            }else if(userOptions.equalsIgnoreCase("5")){
+                System.out.println("okay..bye");
+                repeat = false;
+            } //else if
 
-    }
+        } while(repeat);
+
+    } //switchCase()
 
     public static void deleteContact (String contactToDelete) {
         List<String> lines = null;
@@ -103,8 +108,6 @@ public class ContactTest {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
 
         List<String> newList = new ArrayList<>();
         for (String line : lines) {
@@ -127,8 +130,24 @@ public class ContactTest {
 
     public static void displayContacts (List<Contact> contacts) {
         for(Contact contact: contacts){
-//            System.out.println(contact.getNamePhoneNumber());
-        }
-    }
+            System.out.println(contact.getNamePhoneNumber());
+        } //for
+    } //displayContacts()
+
+    public static void searchContact(String contactToSearch) {
+        List<String> lines = null;
+        try {
+            lines = Files.readAllLines(Paths.get("src", "ContactList.txt"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        } //try/catch
+
+        for (String line : lines) {
+            if (line.contains(contactToSearch)) {
+                System.out.println(line);
+            } //if
+
+        } //for
+    } //searchContact
 
 } //ContactTest Class
