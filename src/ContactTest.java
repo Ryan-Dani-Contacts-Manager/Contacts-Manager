@@ -96,30 +96,34 @@ public class ContactTest {
 
     }
 
-    public static List<String> deleteContact (String contactToDelete) {
-
+    public static void deleteContact (String contactToDelete) {
+        List<String> lines = null;
         try {
-            List<String> lines = new ArrayList<>();
             lines = Files.readAllLines(Paths.get("src", "ContactList.txt"));
-            for (String line: lines) {
-//                System.out.println(line);
-                if(line.contains(contactToDelete)){
-                    lines.remove(line);
-                    System.out.println(line);
-                    continue;
-                }//If statement
-//                lines.add(line);
-            }//forloop
-            System.out.println(lines);
-            Files.write(Paths.get("src", "ContactList.txt"), lines);
-           return lines;
-
         } catch (IOException e) {
             e.printStackTrace();
-            return deleteContact(contactToDelete);
-        }//catch end
+        }
 
-    }
+
+
+        List<String> newList = new ArrayList<>();
+        for (String line : lines) {
+            if (line.contains(contactToDelete)) {
+                continue;
+            }
+            newList.add(line);
+        }
+
+        System.out.println(newList);
+
+        try {
+            Files.write(Paths.get("src", "ContactList.txt"), newList);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+    } // deleteContact()
 
     public static void displayContacts (List<Contact> contacts) {
         for(Contact contact: contacts){
