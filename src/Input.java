@@ -11,13 +11,13 @@ public class Input {
 
 
     public boolean yesNo() {
-        System.out.println("Y/N?");
+        System.out.println("Do you want to continue Y/N?");
         String answer = this.scanner.nextLine();
         return answer.equalsIgnoreCase("y") || answer.equalsIgnoreCase("yes");
 
     }
 
-    private String getString() {
+    public String getString() {
 
         return this.scanner.nextLine();
     }
