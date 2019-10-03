@@ -21,7 +21,7 @@ public class ContactTest {
     addContact("Ryan", "093284");
     addContact("Daniel", "93028343");
     String userOption = userMenu(userInput);
-    switchCase(userOption,userInput);
+    switchCase(userOption,userInput,contacts);
 
 
 //        String userName = userInput.getString("give a name");
@@ -76,22 +76,31 @@ public class ContactTest {
 
     }
 
-    public static void switchCase (String userOptions, Input scanner) {
+    public static void switchCase (String userOptions, Input scanner,List<Contact> contacts) {
         if (userOptions.equalsIgnoreCase("1")) {
-
-            System.out.println("you chose 1");
+            displayContacts(contacts);
         }else if(userOptions.equalsIgnoreCase("2")){
             String userName = scanner.getString("give a name");
             String  userNumber = scanner.getString("give their number");
             addContact(userName,userNumber);
         }else if(userOptions.equalsIgnoreCase("3")){
-            System.out.println("You chose 3");
+           String contactToDelete = scanner.getString("Enter a name to delete");
         }else if(userOptions.equalsIgnoreCase("4")){
             System.out.println("you chose 4");
         }else if(userOptions.equalsIgnoreCase("5")){
             System.out.println("okay..bye");
         }
 
+    }
+
+//    public static List<String> deleteContact () {
+//
+//    }
+
+    public static void displayContacts (List<Contact> contacts) {
+        for(Contact contact: contacts){
+            System.out.println(contact.getNamePhoneNumber());
+        }
     }
 
 } //ContactTest Class
