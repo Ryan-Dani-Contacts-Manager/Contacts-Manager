@@ -48,6 +48,7 @@ public class ContactActions  {
         } //try/catch
 
         for (String line : lines) {
+
             System.out.println(line);
 
         } //for

@@ -13,4 +13,4 @@ public class Format {
         return stringContacts;
 
     } //formatObjectsToStrings()
-}
+} //Format Class
